@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "tXvTQVFyZUSYlA+CrqGb1q1uuHzka2QD2AQQJrNw0qfyhGJD9gDkmu9hhARzgVz7D2dUxTRHA+z/1U/EFoWFyw==",
+  "success": true,
+  "projectFilePath": "F:\\C# or C++ Projects\\BudgetAssistant\\BudgetAssistant.Application\\BudgetAssistant.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\crompp\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
