@@ -106,10 +106,13 @@ namespace BudgetAssistant.Infrastructure.Migrations
                     b.Property<TimeSpan>("IncomeInterval")
                         .HasColumnType("time");
 
+                    b.Property<double>("MonthSavings")
+                        .HasColumnType("float");
+
                     b.Property<bool>("RegularIncome")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Savings")
+                    b.Property<double>("TotalSavings")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -140,9 +143,6 @@ namespace BudgetAssistant.Infrastructure.Migrations
                     b.Property<int?>("ItemCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("JarId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -151,8 +151,6 @@ namespace BudgetAssistant.Infrastructure.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ItemCategoryId");
-
-                    b.HasIndex("JarId");
 
                     b.ToTable("Expenses");
                 });
@@ -170,45 +168,14 @@ namespace BudgetAssistant.Infrastructure.Migrations
                     b.Property<bool>("CanRemove")
                         .HasColumnType("bit");
 
-                    b.Property<int>("JarId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("JarId");
 
                     b.ToTable("ExpenseCategories");
-                });
-
-            modelBuilder.Entity("BudgetAssistant.Domain.Entity.Jar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("MoneyLeft")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Percentage")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("Jars");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -361,40 +328,15 @@ namespace BudgetAssistant.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("ItemCategoryId");
 
-                    b.HasOne("BudgetAssistant.Domain.Entity.Jar", "Jar")
-                        .WithMany()
-                        .HasForeignKey("JarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("ItemCategory");
-
-                    b.Navigation("Jar");
                 });
 
             modelBuilder.Entity("BudgetAssistant.Domain.Entity.ExpenseCategory", b =>
                 {
                     b.HasOne("BudgetAssistant.Domain.Entity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("BudgetAssistant.Domain.Entity.Jar", "Jar")
                         .WithMany("Categories")
-                        .HasForeignKey("JarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Jar");
-                });
-
-            modelBuilder.Entity("BudgetAssistant.Domain.Entity.Jar", b =>
-                {
-                    b.HasOne("BudgetAssistant.Domain.Entity.ApplicationUser", "ApplicationUser")
-                        .WithMany("Jars")
                         .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
@@ -455,11 +397,6 @@ namespace BudgetAssistant.Infrastructure.Migrations
                 {
                     b.Navigation("Budget");
 
-                    b.Navigation("Jars");
-                });
-
-            modelBuilder.Entity("BudgetAssistant.Domain.Entity.Jar", b =>
-                {
                     b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618

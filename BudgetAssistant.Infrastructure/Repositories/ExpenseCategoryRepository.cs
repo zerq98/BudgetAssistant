@@ -1,10 +1,7 @@
 ﻿using BudgetAssistant.Domain.Entity;
 using BudgetAssistant.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BudgetAssistant.Infrastructure.Repositories
@@ -55,11 +52,6 @@ namespace BudgetAssistant.Infrastructure.Repositories
             return _context.ExpenseCategories;
         }
 
-        public IQueryable<ExpenseCategory> GetAllFromJar(int jarId)
-        {
-            return _context.ExpenseCategories.Where(x => x.JarId==jarId);
-        }
-
         public async Task<ExpenseCategory> GetByIdAsync(int modelId)
         {
             return await _context.ExpenseCategories.FirstOrDefaultAsync(x => x.Id == modelId);
@@ -74,7 +66,6 @@ namespace BudgetAssistant.Infrastructure.Repositories
             }
             catch
             {
-
             }
         }
     }

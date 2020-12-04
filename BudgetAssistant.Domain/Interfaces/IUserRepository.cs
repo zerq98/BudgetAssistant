@@ -1,15 +1,14 @@
 ﻿using BudgetAssistant.Domain.Entity;
-using System;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BudgetAssistant.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        public Task<string> RegisterAsync(ApplicationUser user,string password);
+        public Task<string> RegisterAsync(ApplicationUser user, string password);
 
         public Task<string> EditUserAsync(ApplicationUser user);
 
@@ -21,7 +20,7 @@ namespace BudgetAssistant.Domain.Interfaces
 
         public Task<List<string>> GetUserRoles(string userId);
 
-        public Task<ApplicationUser> GetUserByEmailAsync(string email);
+        public Task<ApplicationUser> GetUserByLoginAsync(string login);
 
         public Task<bool> CheckPasswordAsync(ApplicationUser user, string password);
     }

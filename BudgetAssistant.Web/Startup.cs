@@ -1,16 +1,14 @@
 using BudgetAssistant.Application;
 using BudgetAssistant.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BudgetAssistant.Web
 {
@@ -41,7 +39,20 @@ namespace BudgetAssistant.Web
                 options.SlidingExpiration = true;
             });
 
+            services.AddAuthentication();
+            services.AddAuthorization();
+
+            services.AddMvc(options =>
+            {
+                //var policy = new AuthorizationPolicyBuilder()
+                //                .RequireAuthenticatedUser()
+                //                .Build();
+                //options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddXmlSerializerFormatters();
+
             services.AddControllersWithViews();
+
+            services.AddHttpContextAccessor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

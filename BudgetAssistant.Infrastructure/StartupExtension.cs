@@ -13,21 +13,27 @@ namespace BudgetAssistant.Infrastructure
         {
             services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<AppDataContext>();
+                .AddEntityFrameworkStores<AppDataContext>()
+                .AddDefaultTokenProviders();
+
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IBudgetRepository, BudgetRepository>();
+            services.AddTransient<IExpenseCategoryRepository, ExpenseCategoryRepository>();
+            services.AddTransient<IExpenseRepository, ExpenseRepository>();
 
-            services.Configure<IdentityOptions>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 10;
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredUniqueChars = 1;
+                options.User.RequireUniqueEmail = true;
 
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(7);
-            });
+            }).AddEntityFrameworkStores<AppDataContext>();
 
             services.AddLogging();
         }

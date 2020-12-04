@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BudgetAssistant.Application.Interface;
+using BudgetAssistant.Application.Service;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BudgetAssistant.Application
 {
@@ -9,7 +8,7 @@ namespace BudgetAssistant.Application
     {
         public static void AddApplication(this IServiceCollection services)
         {
-
+            services.AddTransient<IAccountService, AccountService>();
         }
     }
 }

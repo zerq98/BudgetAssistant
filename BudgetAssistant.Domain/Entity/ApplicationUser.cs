@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BudgetAssistant.Domain.Entity
 {
     public class ApplicationUser : IdentityUser
     {
-        public List<Jar> Jars { get; set; }
+        public List<ExpenseCategory> Categories { get; set; }
 
         public int BudgetId { get; set; }
 

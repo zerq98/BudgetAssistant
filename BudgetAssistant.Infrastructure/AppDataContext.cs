@@ -1,9 +1,6 @@
 ﻿using BudgetAssistant.Domain.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BudgetAssistant.Infrastructure
 {
@@ -15,12 +12,9 @@ namespace BudgetAssistant.Infrastructure
 
         public DbSet<ExpenseCategory> ExpenseCategories { get; set; }
 
-        public DbSet<Jar> Jars { get; set; }
-
         public AppDataContext(DbContextOptions<AppDataContext> options)
             : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

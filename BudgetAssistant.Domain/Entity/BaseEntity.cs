@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BudgetAssistant.Domain.Entity
+﻿namespace BudgetAssistant.Domain.Entity
 {
     public class BaseEntity
     {

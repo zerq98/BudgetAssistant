@@ -1,9 +1,7 @@
 ﻿using BudgetAssistant.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BudgetAssistant.Infrastructure.Repositories
@@ -29,7 +27,6 @@ namespace BudgetAssistant.Infrastructure.Repositories
             }
             catch
             {
-
             }
         }
 
@@ -42,7 +39,6 @@ namespace BudgetAssistant.Infrastructure.Repositories
             }
             catch
             {
-
             }
         }
 

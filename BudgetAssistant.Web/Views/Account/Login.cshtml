@@ -1,0 +1,37 @@
+﻿@model AuthenticationVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-hero">
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn" onclick="login()">Login</button>
+            <button type="button" class="toggle-btn" onclick="register()">Register</button>
+        </div>
+        <div class="social-icons">
+            <img src="~/resources/fb.png" />
+            <img src="~/resources/google.png" />
+        </div>
+        <form id="login" class="login-input-group" method="post" asp-action="Login">
+            <input type="text" class="login-input-field" placeholder="Login" asp-for="Login.Login" required />
+            <input type="password" class="login-input-field" placeholder="Password" asp-for="Login.Password" required />
+            <input type="checkbox" class="login-check-box" asp-for="Login.RememberPassword" /><span>Remember Password</span>
+            <button type="submit" class="login-submit-btn">Login</button>
+        </form>
+        <form id="register" class="login-input-group" method="post" asp-action="Register">
+            <input type="text" class="login-input-field" placeholder="Login" asp-for="Register.Login" required />
+            <input type="email" class="login-input-field" placeholder="Email" asp-for="Register.Email" required />
+            <input type="password" class="login-input-field" placeholder="Password" asp-for="Register.Password" required />
+            <input type="password" class="login-input-field" placeholder="Confirm Password" asp-for="Register.ConfirmPassword" required />
+            <input type="checkbox" class="login-check-box" required /><span>I agree to the terms & conditions</span>
+            <button type="submit" class="login-submit-btn">Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/auth.js"></script>
+}

@@ -1,10 +1,8 @@
 ﻿using BudgetAssistant.Domain.Entity;
 using BudgetAssistant.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BudgetAssistant.Infrastructure.Repositories
@@ -12,15 +10,12 @@ namespace BudgetAssistant.Infrastructure.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly AppDataContext _context;
 
         public UserRepository(UserManager<ApplicationUser> userManager,
-                              RoleManager<IdentityRole> roleManager,
                               AppDataContext context)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
             _context = context;
         }
 
@@ -61,11 +56,12 @@ namespace BudgetAssistant.Infrastructure.Repositories
             return _context.Users;
         }
 
-        public async Task<string> RegisterAsync(ApplicationUser user,string password)
+        public async Task<string> RegisterAsync(ApplicationUser user, string password)
         {
             try
             {
-                await _userManager.CreateAsync(user, password);
+                var result = await _userManager.CreateAsync(user, password);
+                await _context.SaveChangesAsync();
                 return user.Id;
             }
             catch
@@ -79,9 +75,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
             return (await _userManager.GetRolesAsync(await GetUserByIdAsync(userId))).ToList();
         }
 
-        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        public async Task<ApplicationUser> GetUserByLoginAsync(string login)
         {
-            return await _userManager.FindByEmailAsync(email);
+            return await _userManager.FindByNameAsync(login);
         }
 
         public async Task<bool> CheckPasswordAsync(ApplicationUser user, string password)

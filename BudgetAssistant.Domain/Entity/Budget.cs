@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BudgetAssistant.Domain.Entity
 {
@@ -8,7 +6,9 @@ namespace BudgetAssistant.Domain.Entity
     {
         public double Income { get; set; }
 
-        public double Savings { get; set; }
+        public double TotalSavings { get; set; }
+
+        public double MonthSavings { get; set; }
 
         public bool RegularIncome { get; set; }
 
