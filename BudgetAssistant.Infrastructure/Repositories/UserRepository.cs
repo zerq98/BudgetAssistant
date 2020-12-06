@@ -2,6 +2,7 @@
 using BudgetAssistant.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace BudgetAssistant.Infrastructure.Repositories
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly AppDataContext _context;
+        private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public UserRepository(UserManager<ApplicationUser> userManager,
                               AppDataContext context)
@@ -21,14 +23,21 @@ namespace BudgetAssistant.Infrastructure.Repositories
 
         public async Task AssignUserToRoleAsync(string userId, List<string> roles)
         {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user != null)
+            try
             {
-                var result = await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
-                if (result.Succeeded)
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user != null)
                 {
-                    await _userManager.AddToRolesAsync(user, roles);
+                    var result = await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
+                    if (result.Succeeded)
+                    {
+                        await _userManager.AddToRolesAsync(user, roles);
+                    }
                 }
+            }
+            catch (DbException ex)
+            {
+                _logger.Error(ex.Message);
             }
         }
 
@@ -40,8 +49,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
                 return user.Id;
             }
-            catch
+            catch(DbException ex)
             {
+                _logger.Error(ex.Message);
                 return "Error";
             }
         }
@@ -64,8 +74,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
                 return user.Id;
             }
-            catch
+            catch (DbException ex)
             {
+                _logger.Error(ex.Message);
                 return "Error";
             }
         }
@@ -87,9 +98,17 @@ namespace BudgetAssistant.Infrastructure.Repositories
 
         public async Task RemoveUser(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
-            user.IsActive = false;
-            await _userManager.UpdateAsync(user);
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                user.IsActive = false;
+                await _userManager.UpdateAsync(user);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbException ex)
+            {
+                _logger.Error(ex.Message);
+            }
         }
     }
 }

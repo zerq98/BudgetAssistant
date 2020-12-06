@@ -374,7 +374,6 @@ F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\BudgetAssistant.Web.TagHelpers.output.cache
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\BudgetAssistant.Web.RazorCoreGenerate.cache
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -432,3 +431,7 @@ F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\BudgetAssistant.Web.MvcApplicationPartsAssemblyInfo.cs
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\nlog.config
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\NLog.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll

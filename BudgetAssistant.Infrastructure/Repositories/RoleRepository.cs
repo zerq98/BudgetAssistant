@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Threading.Tasks;
 
 namespace BudgetAssistant.Infrastructure.Repositories
@@ -10,6 +11,7 @@ namespace BudgetAssistant.Infrastructure.Repositories
     {
         private readonly AppDataContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public RoleRepository(AppDataContext context,
                               RoleManager<IdentityRole> roleManager)
@@ -25,8 +27,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
                 await _roleManager.CreateAsync(role);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch(DbException ex)
             {
+                _logger.Error(ex.Message);
             }
         }
 
@@ -37,8 +40,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
                 _context.Roles.Update(role);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbException ex)
             {
+                _logger.Error(ex.Message);
             }
         }
 
@@ -49,11 +53,18 @@ namespace BudgetAssistant.Infrastructure.Repositories
 
         public async Task RemoveRoleAsync(string roleId)
         {
-            var role = await _roleManager.FindByIdAsync(roleId);
-
-            if (role != null)
+            try
             {
-                await _roleManager.DeleteAsync(role);
+                var role = await _roleManager.FindByIdAsync(roleId);
+
+                if (role != null)
+                {
+                    await _roleManager.DeleteAsync(role);
+                }
+            }
+            catch (DbException ex)
+            {
+                _logger.Error(ex.Message);
             }
         }
     }

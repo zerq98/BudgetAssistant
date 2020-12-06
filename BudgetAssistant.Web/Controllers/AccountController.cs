@@ -1,5 +1,6 @@
 ﻿using BudgetAssistant.Application.Interface;
 using BudgetAssistant.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -15,12 +16,8 @@ namespace BudgetAssistant.Web.Controllers
             _accountService = accountService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(AuthenticationVM model)
         {
             if (ModelState.IsValid)
@@ -52,6 +49,7 @@ namespace BudgetAssistant.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(AuthenticationVM model)
         {
             if (ModelState.IsValid)

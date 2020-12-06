@@ -1,0 +1,136 @@
+﻿.login-hero {
+    height: 100%;
+    width: 100%;
+    background-image: url("../resources/banner.jpg");
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+
+.form-box {
+    width: 380px;
+    height: 580px;
+    background: rgba(255,255,255,.75);
+    position: relative;
+    margin: 6% auto;
+    padding: 5px;
+}
+
+.form-control:valid {
+    background: transparent !important;
+}
+
+.button-box {
+    width: 221px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px rgba(0,241,255,.15);
+    border-radius: 30px;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+
+button:focus {
+    outline: none;
+}
+
+#btn {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,205,103,1) 0%, rgba(0,241,255,1) 100%);
+    border-radius: 30px;
+    transition: .5s;
+}
+
+.social-icons {
+    margin: 30px auto;
+    text-align: center;
+}
+
+    .social-icons img {
+        width: 30px;
+        margin: 0 12px;
+        border-radius: 50%;
+        box-shadow: 0 0 20px 0 #7f7f7f3d;
+        cursor: pointer;
+    }
+
+.login-input-group {
+    top: 200px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+    left: 15%;
+}
+
+.login-input-field {
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #00cd67;
+    background: transparent;
+    outline: none;
+}
+
+.login-submit-btn {
+    width: auto;
+    padding: 10px 50px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    background: linear-gradient(90deg, rgba(0,205,103,1) 0%, rgba(0,241,255,1) 100%);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+.login-check-box {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.login-input-group span {
+    color: #3d3d3d;
+    font-size: 15px;
+    margin: 0 0 0 10px;
+}
+
+#login {
+    display: block;
+}
+
+#register {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .form-box {
+        width: 280px;
+        height: 480px;
+        margin: 6% auto;
+        padding: 5px;
+    }
+
+    .login-input-group{
+        width: 180px;
+        top: 150px;
+    }
+
+        .login-input-group span {
+            font-size: 12px;
+        }
+}

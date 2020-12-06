@@ -1,8 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿<link rel="stylesheet" href="~/css/homePage.css" />
+@{
+    ViewData["Title"] = "Budget Assistant";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <nav id="bignav" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3 sticky-nav">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Budget Assistant</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="text-dark" asp-controller="Account" asp-action="Login">Join us!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="ads">
+        <div class="single-ad">
+
+        </div>
+        <div class="single-ad">
+
+        </div>
+        <div class="single-ad">
+
+        </div>
+        <div class="single-ad">
+
+        </div>
+        <div class="single-ad">
+
+        </div>
+    </div>
+    <div>
+        <footer class="footer">
+            &copy; Mateusz Trybuła
+        </footer>
+    </div>
 </div>
+
+@section Scripts{
+<script src="~/js/home.js"></script>
+}

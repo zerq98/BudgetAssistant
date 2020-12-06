@@ -1,6 +1,7 @@
 ﻿using BudgetAssistant.Domain.Entity;
 using BudgetAssistant.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace BudgetAssistant.Infrastructure.Repositories
     public class ExpenseRepository : IExpenseRepository
     {
         private readonly AppDataContext _context;
+        private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public ExpenseRepository(AppDataContext context)
         {
@@ -23,8 +25,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
                 return model.Id;
             }
-            catch
+            catch(DbException ex)
             {
+                _logger.Error(ex.Message);
                 return 0;
             }
         }
@@ -37,8 +40,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
                 return model.Id;
             }
-            catch
+            catch (DbException ex)
             {
+                _logger.Error(ex.Message);
                 return 0;
             }
         }
@@ -69,8 +73,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
                 _context.Expenses.Remove(model);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbException ex)
             {
+                _logger.Error(ex.Message);
             }
         }
     }
