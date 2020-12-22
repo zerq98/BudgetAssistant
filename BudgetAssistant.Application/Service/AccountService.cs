@@ -12,17 +12,14 @@ namespace BudgetAssistant.Application.Service
     {
         private readonly IUserRepository _userRepository;
         private readonly IBudgetRepository _budgetRepository;
-        private readonly IRoleRepository _roleRepository;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AccountService(IUserRepository userRepository,
                               IBudgetRepository budgetRepository,
-                              IRoleRepository roleRepository,
                               SignInManager<ApplicationUser> signInManager)
         {
             _userRepository = userRepository;
             _budgetRepository = budgetRepository;
-            _roleRepository = roleRepository;
             _signInManager = signInManager;
         }
 
@@ -44,9 +41,11 @@ namespace BudgetAssistant.Application.Service
                         return "Locked";
                     }
                 }
+
+                return "Wrong data";
             }
 
-            throw new NotImplementedException();
+            return "Wrong data";
         }
 
         public async Task<bool> Register(RegisterDto dto)
@@ -61,13 +60,16 @@ namespace BudgetAssistant.Application.Service
 
             if (result != "Error")
             {
+                var now = DateTime.Now;
                 var budgetId = await _budgetRepository.AddNewAsync(new Budget
                 {
                     ApplicationUserId = result,
                     RegularIncome = false,
                     MonthSavings = 0,
                     TotalSavings = 0,
-                    Income = 0
+                    Income = 0,
+                    CreationDate=now,
+                    LastModified=now
                 });
 
                 user = await _userRepository.GetUserByIdAsync(result);

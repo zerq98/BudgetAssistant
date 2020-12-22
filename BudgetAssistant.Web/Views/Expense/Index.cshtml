@@ -1,0 +1,36 @@
+﻿@model List<BudgetAssistant.Application.Dto.Category.ViewCategoryTabDto>
+<link rel="stylesheet" href="~/css/Expenses.css" />
+@{
+    var userId = ViewBag.userId;
+    var category = new BudgetAssistant.Application.Dto.Category.CreateCategoryDto();
+}
+
+<div id="categoryDialog">
+    <div id="dialog">
+        <form id="frm" asp-action="AddCategory" asp-controller="Expense" asp-route-dto="@category">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label id="frm" asp-for="@category.Name"></label>
+            <input id="frm" type="text" asp-for="@category.Name" class="form-control" />
+            <span id="frm" asp-validation-for="@category.Name" class="text-danger"></span>
+            <input type="hidden" asp-for="@category.ApplicationUserId" value="@userId" />
+            <button id="frm" type="submit">Create</button>
+        </form>
+    </div>
+</div>
+
+<div id="tabs">
+    <ul>
+        <li></li>
+        @foreach (var cat in Model)
+        {
+            <li id="@cat.Name">@cat.Name</li>
+        }
+        <li id="newCat">
+            <img src="~/resources/plus.png" />
+        </li>
+    </ul>
+</div>
+
+@section Scripts{
+    <script src="~/js/expenses.js"></script>
+}

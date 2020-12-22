@@ -22,6 +22,9 @@ namespace BudgetAssistant.Infrastructure.Repositories
             try
             {
                 await _context.Expenses.AddAsync(model);
+                var budget = await _context.Budgets.FirstOrDefaultAsync(x => x.ApplicationUserId == model.ApplicationUserId);
+                budget.MonthSavings += model.Value;
+                _context.Budgets.Update(budget);
                 await _context.SaveChangesAsync();
                 return model.Id;
             }

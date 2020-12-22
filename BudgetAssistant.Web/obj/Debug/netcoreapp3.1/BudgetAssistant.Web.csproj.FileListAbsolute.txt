@@ -435,3 +435,11 @@ F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\NLog.dll
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\AutoMapper.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\Linq.Extension.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\MoreLinq.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\Razor\Views\Expense\Index.cshtml.g.cs
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\FluentValidation.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

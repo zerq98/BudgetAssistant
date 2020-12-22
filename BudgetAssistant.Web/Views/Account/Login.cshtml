@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="~/css/loginPage.css" />
 @{
     ViewData["Title"] = "Login";
+    var wrong = ViewData["WrongData"] as string;
 }
 
 <div class="login-hero">
@@ -16,6 +17,10 @@
             <img src="~/resources/google.png" />
         </div>
         <form id="login" class="login-input-group" method="post" asp-action="Login" autocomplete="off">
+            @if (wrong == "true")
+            {
+                <span class="text-danger"> Invalid login or password</span>
+            }
             <input type="text" class="login-input-field" placeholder="Login" asp-for="Login.Login" required />
             <input type="password" class="login-input-field" placeholder="Password" asp-for="Login.Password" required />
             <div class="login-check-box">
@@ -24,6 +29,9 @@
             <button type="submit" class="login-submit-btn">Login</button>
         </form>
         <form id="register" class="login-input-group" method="post" asp-action="Register" autocomplete="off">
+            <div class="row">
+                <span asp-validation-for="Register" class="text-danger"></span>
+            </div>
             <input type="text" class="login-input-field" placeholder="Login" asp-for="Register.Login" required />
             <input type="email" class="login-input-field" placeholder="Email" asp-for="Register.Email" required />
             <input type="password" class="login-input-field" placeholder="Password" asp-for="Register.Password" required />

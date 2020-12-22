@@ -100,11 +100,17 @@ namespace BudgetAssistant.Infrastructure.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<double>("Income")
                         .HasColumnType("float");
 
                     b.Property<TimeSpan>("IncomeInterval")
                         .HasColumnType("time");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("MonthSavings")
                         .HasColumnType("float");
@@ -146,6 +152,9 @@ namespace BudgetAssistant.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
@@ -165,11 +174,17 @@ namespace BudgetAssistant.Infrastructure.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("CanRemove")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("TotalExpensesValue")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -325,7 +340,7 @@ namespace BudgetAssistant.Infrastructure.Migrations
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("BudgetAssistant.Domain.Entity.ExpenseCategory", "ItemCategory")
-                        .WithMany()
+                        .WithMany("Expenses")
                         .HasForeignKey("ItemCategoryId");
 
                     b.Navigation("ApplicationUser");
@@ -398,6 +413,11 @@ namespace BudgetAssistant.Infrastructure.Migrations
                     b.Navigation("Budget");
 
                     b.Navigation("Categories");
+                });
+
+            modelBuilder.Entity("BudgetAssistant.Domain.Entity.ExpenseCategory", b =>
+                {
+                    b.Navigation("Expenses");
                 });
 #pragma warning restore 612, 618
         }

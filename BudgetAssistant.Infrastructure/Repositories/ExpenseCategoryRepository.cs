@@ -51,7 +51,7 @@ namespace BudgetAssistant.Infrastructure.Repositories
         {
             if (userId != null)
             {
-                return _context.ExpenseCategories.Where(x => x.ApplicationUserId == userId);
+                return _context.ExpenseCategories.Include(x=>x.Expenses).Where(x => x.ApplicationUserId == userId);
             }
             return _context.ExpenseCategories;
         }

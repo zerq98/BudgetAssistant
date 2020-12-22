@@ -1,9 +1,63 @@
-﻿<link rel="stylesheet" href="~/css/homePage.css" />
-@{
-    ViewData["Title"] = "Budget Assistant";
-}
+﻿@model HomeVM
 
-<div>
+@if (User.Identity.IsAuthenticated)
+{
+    <link rel="stylesheet" href="~/css/homePage.css" />
+
+    <div class="container align-content-between">
+        <div class="row">
+            <div class="col-7">
+                <h4>Your categories:</h4>
+                <div class="row ml-3">
+                    <a class="catBtn">New category</a>
+                </div>
+                <div id="categories">
+                    @if (Model.Categories.Count == 0)
+                    {
+                        <h5>You don't have any categories yet.</h5>
+                        <h6>Add some categories to see this list.</h6>
+                    }
+                    else
+                    {
+
+                    }
+                </div>
+            </div>
+            <div class="col-5 justify-content-center">
+                <div class="container">
+                    <h4>Last operations</h4>
+                    <div class="lastOperation">
+                        @if (Model.LastOperations.Count == 0)
+                        {
+                            <h5>You don't have any operations yet.</h5>
+                            <h6>Add some expenses to see this list.</h6>
+                        }
+                        else
+                        {
+
+                        }
+                    </div>
+                </div>
+                <div class="container mt-5">
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    @section Scripts{
+        <script type="text/javascript">
+            var XLabels;
+            var YValues;
+        </script>
+        <script src="~/js/home.js"></script>
+    }
+}
+else
+{
+    <link rel="stylesheet" href="~/css/landingPage.css" />
+
     <nav id="bignav" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3 sticky-nav">
         <div class="container">
             <a class="navbar-brand" asp-controller="Home" asp-action="Index">Budget Assistant</a>
@@ -20,30 +74,32 @@
             </div>
         </div>
     </nav>
-    <div class="ads">
-        <div class="single-ad">
-
-        </div>
-        <div class="single-ad">
-
-        </div>
-        <div class="single-ad">
-
-        </div>
-        <div class="single-ad">
-
-        </div>
-        <div class="single-ad">
-
-        </div>
-    </div>
     <div>
-        <footer class="footer">
-            &copy; Mateusz Trybuła
-        </footer>
-    </div>
-</div>
+        <div class="ads">
+            <div class="single-ad">
 
-@section Scripts{
-<script src="~/js/home.js"></script>
+            </div>
+            <div class="single-ad">
+
+            </div>
+            <div class="single-ad">
+
+            </div>
+            <div class="single-ad">
+
+            </div>
+            <div class="single-ad">
+
+            </div>
+        </div>
+        <div>
+            <footer class="footer">
+                &copy; Mateusz Trybuła
+            </footer>
+        </div>
+    </div>
+
+    @section Scripts{
+        <script src="~/js/landing.js"></script>
+    }
 }

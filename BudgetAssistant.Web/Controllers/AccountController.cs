@@ -45,6 +45,7 @@ namespace BudgetAssistant.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            ViewData["WrongData"] = "false";
             return View();
         }
 
@@ -58,12 +59,19 @@ namespace BudgetAssistant.Web.Controllers
                 {
                     var result = await _accountService.Login(model.Login);
 
-                    if (result == "Wrong Data")
+                    if (result == "Wrong data")
+                    {
+                        ViewData["WrongData"] = "true";
+                        return View();
+
+                    }else if(result == "Logged")
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
                     {
                         return View();
                     }
-
-                    return RedirectToAction("Index", "Home");
                 }
                 catch
                 {

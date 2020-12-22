@@ -1,6 +1,10 @@
-﻿using BudgetAssistant.Web.Models;
+﻿using BudgetAssistant.Application.Dto.Category;
+using BudgetAssistant.Application.Dto.Expense;
+using BudgetAssistant.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace BudgetAssistant.Web.Controllers
@@ -16,7 +20,10 @@ namespace BudgetAssistant.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new HomeVM();
+            model.Categories = new List<ViewCategoryDto>();
+            model.LastOperations = new List<ViewExpenseDto>();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
