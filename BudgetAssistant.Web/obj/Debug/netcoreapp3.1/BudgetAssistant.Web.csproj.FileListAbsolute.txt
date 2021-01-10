@@ -443,3 +443,4 @@ F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll
 F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\obj\Debug\netcoreapp3.1\Razor\Views\Expense\_CategoryDialog.cshtml.g.cs

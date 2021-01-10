@@ -26,8 +26,15 @@ using BudgetAssistant.Web.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "F:\C# or C++ Projects\BudgetAssistant\BudgetAssistant.Web\Views\_ViewImports.cshtml"
+using System.Security.Claims;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"95c0a56d745b163333aaba4d5b4243d229247a76", @"/Views/Account/Success.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c4bfdb51671b7091162448ac708ef4f259b44883", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"38f143c816ce3897055e8e0310b3e5586da916ca", @"/Views/_ViewImports.cshtml")]
     public class Views_Account_Success : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

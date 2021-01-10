@@ -32,7 +32,7 @@ namespace BudgetAssistant.Web
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
 
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";
@@ -44,10 +44,10 @@ namespace BudgetAssistant.Web
 
             services.AddMvc(options =>
             {
-                //var policy = new AuthorizationPolicyBuilder()
-                //                .RequireAuthenticatedUser()
-                //                .Build();
-                //options.Filters.Add(new AuthorizeFilter(policy));
+                var policy = new AuthorizationPolicyBuilder()
+                                .RequireAuthenticatedUser()
+                                .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
             }).AddXmlSerializerFormatters();
 
             services.AddControllersWithViews();

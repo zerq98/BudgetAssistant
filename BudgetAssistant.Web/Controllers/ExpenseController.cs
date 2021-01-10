@@ -1,5 +1,6 @@
 ﻿using BudgetAssistant.Application.Dto.Category;
 using BudgetAssistant.Application.Interface;
+using BudgetAssistant.Web.Models;
 using BudgetAssistant.Web.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,20 +28,38 @@ namespace BudgetAssistant.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> IndexAsync(string userId)
         {
-            var list = await _categoryService.GetCategories(userId);
+            ExpensesAndCategoryVm viewModel = new ExpensesAndCategoryVm();
+            viewModel.Categories = await _categoryService.GetCategories(userId);
+            foreach(var category in viewModel.Categories)
+            {
+                category.Expenses = await _expenseService.GetAllFromCategory(category.Id);
+            }
             ViewBag.userId = userId;
-            return View(list);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategory(CreateCategoryDto dto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCategory(ExpensesAndCategoryVm model)
         {
-            if(new CategoryValidation().Validate(dto).IsValid)
+            if(new CategoryValidation().Validate(model.CreateCategory).IsValid)
             {
-                await _categoryService.AddNewCategory(dto);
+                await _categoryService.AddNewCategory(model.CreateCategory);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { userId = model.CreateCategory.ApplicationUserId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddExpense(ExpensesAndCategoryVm model)
+        {
+            if(new ExpenseValidation().Validate(model.CreateExpense).IsValid)
+            {
+                await _expenseService.AddExpense(model.CreateExpense);
+            }
+
+            return RedirectToAction("Index",new { userId = model.CreateExpense.ApplicationUserId });
         }
     }
 }

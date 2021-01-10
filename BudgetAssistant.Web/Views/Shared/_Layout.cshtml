@@ -6,30 +6,47 @@
     <title>Budget Assistant</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+@{
+    string userId="";
+    if(User.Identity.IsAuthenticated)
+    {
+        userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+    }
+}
 <body>
     @if (User.Identity.IsAuthenticated)
     {
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3">
                 <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Budget Assistant</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" asp-route-userId="@userId">Budget Assistant</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li>
-                                <a class="nav-link text-dark" asp-controller="Expense" asp-action="Index">Expenses</a>
-                            </li>
-                        </ul>
                         <ul class="navbar-nav ml-auto">
+                            <li>
+                                <a class="menuBtn" asp-controller="Expense" asp-action="Index" asp-route-userId="@userId">
+                                    Expenses
+                                </a>
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="AccountInfo">Account</a>
+                                <form method="get" asp-controller="Account" asp-action="AccountInfo">
+                                    <button class="menuBtn">
+                                        Account
+                                    </button>
+                                </form>
                             </li>
                             <li>
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="">Logout</a>
+                                <form method="post" asp-action="logout" asp-controller="account">
+                                    <button class="menuBtn">
+                                        Logout
+                                    </button>
+                                </form>
                             </li>
                         </ul>
                     </div>

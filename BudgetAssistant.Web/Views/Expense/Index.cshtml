@@ -1,34 +1,83 @@
-﻿@model List<BudgetAssistant.Application.Dto.Category.ViewCategoryTabDto>
+﻿@model ExpensesAndCategoryVm
 <link rel="stylesheet" href="~/css/Expenses.css" />
 @{
     var userId = ViewBag.userId;
-    var category = new BudgetAssistant.Application.Dto.Category.CreateCategoryDto();
 }
 
 <div id="categoryDialog">
     <div id="dialog">
-        <form id="frm" asp-action="AddCategory" asp-controller="Expense" asp-route-dto="@category">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <label id="frm" asp-for="@category.Name"></label>
-            <input id="frm" type="text" asp-for="@category.Name" class="form-control" />
-            <span id="frm" asp-validation-for="@category.Name" class="text-danger"></span>
-            <input type="hidden" asp-for="@category.ApplicationUserId" value="@userId" />
-            <button id="frm" type="submit">Create</button>
+        <form id="frm" method="post" asp-action="AddCategory">
+            <span id="frm" asp-validation-for="CreateCategory" class="text-danger"></span>
+            <input id="frm" type="text" asp-for="CreateCategory.Name" class="form-control" placeholder="Name"/>
+            <input id="frm" type="hidden" asp-for="CreateCategory.ApplicationUserId" value="@userId"/>
+            <button id="frm" type="submit">Create category</button>
+        </form>
+    </div>
+</div>
+<div id="expenseDialog">
+    <div id="dialog">
+        <form id="frm" method="post" asp-action="AddExpense">
+            <span id="frm" asp-validation-for="CreateExpense" class="text-danger"></span>
+            <input type="hidden" asp-for="CreateExpense.CategoryId" id="categoryId" value=""/>
+            <input id="frm" type="text" asp-for="CreateExpense.Name" class="form-control" placeholder="Name" />
+            <input id="frm" type="text" asp-for="CreateExpense.Value" class="form-control" placeholder="Value" />
+            <input id="frm" type="hidden" asp-for="CreateExpense.ApplicationUserId" value="@userId" />
+            <button id="frm" type="submit">Add expense</button>
         </form>
     </div>
 </div>
 
-<div id="tabs">
-    <ul>
-        <li></li>
-        @foreach (var cat in Model)
-        {
-            <li id="@cat.Name">@cat.Name</li>
-        }
-        <li id="newCat">
-            <img src="~/resources/plus.png" />
-        </li>
-    </ul>
+<div class="content">
+
+    <section class="accordion">
+        <section class="accordion-tabs">
+            @foreach (var cat in Model.Categories)
+            {
+                <button class="accordion-tab" data-actab-group="0" data-actab-id="@cat.Name">@cat.Name</button>
+            }
+            <button id="newCat" class="tab-add" title="Add new category"/>
+        </section>
+        <section class="accordion-content">
+            @foreach (var cat in Model.Categories)
+            {
+            <article data-actab-id="@cat.Name" data-actab-group="0" class="accordion-item">
+                <h4 class="accordion-item__label">
+                    @cat.Name
+                    <img id="newExp" data-catId="@cat.Id" src="~/resources/plus.png" title="Add new expense"/>
+                </h4>
+                    @if (cat.Expenses.Count == 0)
+                    {
+                        <div class="accordion-item__container">
+                            <p>There is nothing to show for this category!</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="accordion-item__container">
+                            <div class="expDate">Date of expense</div>
+                            <div class="expName">Name of expense</div>
+                            <div class="expValue">Value</div>
+                        </div>
+                        @foreach (var expense in cat.Expenses)
+                        {
+                            <div class="accordion-item__container">
+                                <div class="expDate">@expense.ExpenseDate.ToShortDateString()</div>
+                                <div class="expName">@expense.Name</div>
+                                @if (expense.Value <= 0)
+                                {
+                                    <div class="expValue text-danger">@expense.Value PLN</div>
+                                }
+                                else
+                                {
+                                    <div class="expValue text-success">@expense.Value PLN</div>
+                                }
+                            </div>
+                        }
+                    }
+            </article>
+            }
+        </section>
+    </section>
 </div>
 
 @section Scripts{

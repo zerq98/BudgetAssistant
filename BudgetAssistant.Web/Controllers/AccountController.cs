@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BudgetAssistant.Web.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
@@ -17,6 +18,7 @@ namespace BudgetAssistant.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(AuthenticationVM model)
         {
@@ -43,6 +45,7 @@ namespace BudgetAssistant.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             ViewData["WrongData"] = "false";
@@ -50,6 +53,7 @@ namespace BudgetAssistant.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(AuthenticationVM model)
         {
@@ -82,6 +86,15 @@ namespace BudgetAssistant.Web.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _accountService.Logout();
+
+            return RedirectToAction("Index","Home");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BudgetAssistant.Domain.Entity;
 using BudgetAssistant.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,7 +62,7 @@ namespace BudgetAssistant.Infrastructure.Repositories
 
         public IQueryable<Expense> GetAllFromCategory(int categoryId)
         {
-            return _context.Expenses.Where(x => x.CategoryId == categoryId);
+            return _context.Expenses.Where(x => x.CategoryId == categoryId && x.ExpenseDate>=DateTime.Now.AddDays(-30));
         }
 
         public async Task<Expense> GetByIdAsync(int modelId)

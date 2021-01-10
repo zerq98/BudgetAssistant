@@ -9,6 +9,30 @@
     top: 0;
     left: 0;
     display: none;
+    z-index: 99;
+}
+
+#expenseDialog {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.75);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 99;
+}
+
+#expenseDialog #dialog {
+    width: 20%;
+    height: 25%;
+    background-color: rgba(255,255,255,1);
+    margin-left: -10%;
+    margin-top: -10%;
+    left: 50%;
+    top: 50%;
+    position: fixed;
+    border-radius: 20px;
 }
 
 #dialog {
@@ -19,18 +43,35 @@
     margin-top: -10%;
     left: 50%;
     top: 50%;
-    position:fixed;
-}
-
-#frm{
-    display: block;
+    position: fixed;
+    border-radius: 20px;
 }
 
 #categoryDialog form{
     margin: 10% 10%;
 }
 
-form button {
+#expenseDialog form {
+    margin: 10% 10%;
+}
+
+#expenseDialog input {
+    margin-top: 10px;
+}
+
+#categoryDialog button {
+    width: auto;
+    padding: 10px 50px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    background: linear-gradient(90deg, rgba(0,205,103,1) 0%, rgba(0,241,255,1) 100%);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+#expenseDialog button {
     width: auto;
     padding: 10px 50px;
     cursor: pointer;
@@ -51,33 +92,125 @@ form input {
     outline: none;
 }
 
-#tabs ul{
+.content {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.accordion{
+    box-shadow: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    overflow: hidden;
     width: 100%;
-    height: 40px;
-    list-style-type: none;
 }
 
-#tabs li{
-    float: left;
-    width: 100px;
-    margin: 0 2px;
-    height: 50px;
-    padding: 5px;
+.accordion-item {
+    border:none;
+    display: none;
 }
 
-#tabs li:last-of-type {
-    width: 50px;
+.accordion-itemActive{
+    display:block;
+    border: none;
 }
-#tabs li:first-of-type{
-    width: 10px;
+
+.accordion-item:last-child{
+    border: none;
+}
+
+.accordion-tab {
     background-color: rgba(0,241,255,.25);
+    padding: 1rem 2rem;
+    flex: 1;
+    border: none;
+    cursor: pointer;
+    transition: background 0.1s;
 }
 
-#tabs li:hover{
-    background-color: rgba(0,241,255,.25);
+.accordion-tabs:last-child{
+    background-color: transparent;
 }
 
-#tabs ul img{
-    height:40px;
-    width:40px;
+.accordion-itemActive {
+    background-color: rgba(150,241,255,.25);
+}
+.accordion-active:not(.accordion-item) {
+    background-color: rgba(150,241,255,.25);
+}
+
+.accordion-tab:focus{
+    outline: none;
+}
+
+.accordion-tab:hover {
+    background-color: rgba(150,241,255,.25);
+}
+
+.accordion-item__label {
+    margin: 0;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: padding .2s ease;
+    position: relative;
+}
+
+.accordion-item__container {
+    padding: 0 1.25em;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: padding .2s ease, opacity .5s .15s ease;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.accordion-active .accordion-item__label {
+    padding-bottom: 0;
+    cursor: inherit;
+}
+
+.accordion-active .accordion-item__container {
+    padding: 1.25em;
+    height: auto;
+    opacity: 1;
+}
+
+.tab-add {
+    background-image: url("../resources/plus.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    vertical-align: middle;
+}
+
+#newExp{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.expDate{
+    width: 20%;
+    text-align: left;
+}
+
+.expName {
+    width: 60%;
+    text-align: left;
+}
+
+.expValue {
+    width: 20%;
+    text-align: left;
 }

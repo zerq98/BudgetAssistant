@@ -17,19 +17,27 @@ namespace BudgetAssistant.Application.Service
         private readonly IExpenseCategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<CategoryService> _logger;
+        private readonly IUserRepository _userRepository;
 
         public CategoryService(IExpenseCategoryRepository categoryRepository,
-                               IMapper mapper, ILogger<CategoryService> logger)
+                               IMapper mapper, ILogger<CategoryService> logger,
+                               IUserRepository userRepository)
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
             _logger = logger;
+            _userRepository = userRepository;
         }
         public async Task AddNewCategory(CreateCategoryDto dto)
         {
             try
             {
-                await _categoryRepository.AddNewAsync(_mapper.Map<ExpenseCategory>(dto));
+                var model = _mapper.Map<ExpenseCategory>(dto);
+                model.Expenses = new List<Expense>();
+                model.CreationDate = DateTime.Now;
+                model.LastModified = model.CreationDate;
+                model.ApplicationUser = await _userRepository.GetUserByIdAsync(model.ApplicationUserId);
+                await _categoryRepository.AddNewAsync(model);
             }
             catch(Exception ex)
             {
@@ -44,9 +52,18 @@ namespace BudgetAssistant.Application.Service
 
         public async Task<List<ViewCategoryTabDto>> GetCategories(string userId)
         {
-            return await _categoryRepository
+            var categories = await _categoryRepository
                 .GetAll(userId)
                 .ProjectTo<ViewCategoryTabDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+            return categories;
+        }
+
+        public async Task<List<ViewCategoryDto>> GetViewCategoriesAsync(string userId)
+        {
+            return await _categoryRepository
+                .GetAll(userId)
+                .ProjectTo<ViewCategoryDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
 

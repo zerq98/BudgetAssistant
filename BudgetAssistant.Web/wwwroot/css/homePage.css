@@ -18,3 +18,7 @@
     border: dashed 1px rgba(0,241,255,1);
     position: relative;
 }
+
+h4{
+    font-weight: 600;
+}

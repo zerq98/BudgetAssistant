@@ -48,6 +48,11 @@ namespace BudgetAssistant.Application.Service
             return "Wrong data";
         }
 
+        public async Task Logout()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
         public async Task<bool> Register(RegisterDto dto)
         {
             var user = new ApplicationUser

@@ -12,6 +12,8 @@ namespace BudgetAssistant.Application.Interface
 
         Task<List<ViewCategoryTabDto>> GetCategories(string userId);
 
+        Task<List<ViewCategoryDto>> GetViewCategoriesAsync(string userId);
+
         Task RemoveCategory(int categoryId);
 
         Task EditCategory(EditCategoryDto dto);
